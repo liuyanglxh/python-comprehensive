@@ -6,12 +6,17 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         return self.fixed_tail(s)
 
+    '''
+    总结：
+        从0开始遍历，脚标为i，i代表当前所考虑的字符串的尾部（即：固定尾部）
+        如果此时遍历到的字符和之前重复了，则丢弃之前的那个字符
+    '''
+
     def fixed_tail(self, s) -> int:
         if s == "":
             return 0
-        max_len: int = 1
+        max_len, start_index = 1, -1
         d = {}
-        start_index = -1  # 当前子串的前一个位置
         for index, char in enumerate(s):
             '''
                 例如：当前位置10，字符a：
