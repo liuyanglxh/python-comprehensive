@@ -22,24 +22,17 @@ class Solution:
         if key in self.cache:
             return self.cache[key]
 
-        total = 1
-        for t in range(1, len(nums) + 1):
-            total *= t
-
-        result: List[List[int]] = [[]] * total
-        result_index = 0
-        for index in range(0, len(nums)):
-            num = nums[index]
+        result: List[List[int]] = []
+        for num in nums:
             sub_nums = nums[:]
             sub_nums.remove(num)
 
             sub_list: List[List[int]] = self.permute_sub(sub_nums)
-            for sub_index, sub_result in enumerate(sub_list):
+            for sub_result in sub_list:
                 head: List[int] = [num] * (1 + len(sub_result))
                 for i, e in enumerate(sub_result):
                     head[i + 1] = e
-                result[result_index] = head
-                result_index += 1
+                result.append(head)
 
         self.cache[key] = result
 
