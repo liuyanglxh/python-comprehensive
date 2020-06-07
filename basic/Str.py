@@ -14,3 +14,12 @@ print(ss[0:len(ss):2])
 print("abc".upper())
 print("ABC".lower())
 print("this is a game".title().swapcase())
+
+print(len(" a  ".lstrip()))
+print(len(" a  ".rstrip()))
+print(len(" a  ".strip()))
+
+print(max("啊a"))
+print(min("啊a"))
+
+print('-'.join("abc"))
