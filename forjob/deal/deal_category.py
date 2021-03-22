@@ -57,11 +57,23 @@ def get(category_id: int):
 
 
 def get_attr(category_id: int, attr: str):
+	"""
+	获取分类字段
+	:param category_id:
+	:param attr:
+	:return:
+	"""
 	if category_id is None: return ""
 	return cache.get(category_id).get(attr) if category_id in cache else ""
 
 
 def get_attr_in_order(category_id: int, order=None):
+	"""
+	按顺序获取分类字段
+	:param category_id:
+	:param order:
+	:return:
+	"""
 	if order is None: order = [label_cn, title_cn, label_en, title_en]
 	if category_id is None: return ""
 	c = cache.get(category_id)
