@@ -5,6 +5,7 @@ from util import file_util, mysql_local, my_json
 local_file = '/tmp/category.txt'
 
 cache = {}
+id, parent_id, label_en, label_cn, title_en, title_cn = 'id', 'parent_id', 'label_en', 'label_cn', 'title_en', 'title_cn'
 
 """
 折扣分类缓存
@@ -59,4 +60,4 @@ def get_attr(category_id: int, attr: str):
 
 
 if __name__ == '__main__':
-	print(get_attr(1175715921, 'label_en'))
+	print(get_attr(1175715921, title_cn))
