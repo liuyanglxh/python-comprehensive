@@ -52,11 +52,24 @@ init()
 
 
 def get(category_id: int):
+	if category_id is None: return {}
 	return cache.get(category_id)
 
 
 def get_attr(category_id: int, attr: str):
+	if category_id is None: return ""
 	return cache.get(category_id).get(attr) if category_id in cache else ""
+
+
+def get_attr_in_order(category_id: int, order=None):
+	if order is None: order = [label_cn, title_cn, label_en, title_en]
+	if category_id is None: return ""
+	c = cache.get(category_id)
+	if not c:
+		return ""
+	for x in order:
+		if c.get(x):
+			return c.get(x)
 
 
 if __name__ == '__main__':
