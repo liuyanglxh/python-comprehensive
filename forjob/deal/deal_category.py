@@ -47,13 +47,14 @@ def refresh():
 	file_util.cover(local_file, data_list)
 
 
+init()
+
+
 def get(category_id: int):
-	if not cache: init()
 	return cache.get(category_id)
 
 
 def get_attr(category_id: int, attr: str):
-	if not cache: init()
 	return cache.get(category_id).get(attr) if category_id in cache else ""
 
 
