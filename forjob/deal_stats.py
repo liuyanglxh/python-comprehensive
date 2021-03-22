@@ -1,7 +1,7 @@
 import json
 import time
 
-from forjob.deal import deal_category as category
+from util.deal import deal_category as category
 from util import mysql_local, my_json, file_util, csv_util
 
 tmp_file = '/tmp/deal_tmp.txt'
