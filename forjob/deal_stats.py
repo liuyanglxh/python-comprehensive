@@ -12,8 +12,8 @@ deal_analysis_file = '/Users/liuyang/Downloads/近2周内的折扣统计.csv'
 def to_local():
 	now = int(time.time())
 
-	sql = 'select id, category, is_hotpick from deal_index where published_time >= %s and dead_time >= %s' % (
-		str(now - 7 * 24 * 60 * 60), str(now))
+	sql = "select id, category, is_hotpick from deal_index where cn_state = 'published' and published_time >= %s and dead_time >= %s" % (
+		str(now - 14 * 24 * 60 * 60), str(now))
 	db = 'dealmoon'
 
 	data_list = []
@@ -99,4 +99,10 @@ def top_category(category_id) -> int:
 
 
 if __name__ == '__main__':
+	to_local()
 	analysis()
+	# now = int(time.time())
+	#
+	# sql = "select id, category, is_hotpick from deal_index where cn_state = 'published' and published_time >= %s and dead_time >= %s" % (
+	# 	str(now - 14 * 24 * 60 * 60), str(now))
+	# print(sql)
