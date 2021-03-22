@@ -1,5 +1,5 @@
 import csv
-import os
+from util.file_util import __check_and_create_file
 
 
 def append_head(file_path: str, data: list):
@@ -71,40 +71,6 @@ def cover(file_path: str, heads: list, data_dict: list):
 				lst.append(d.get(head) if head in d else "")
 			writer.writerow(lst)
 		target.close()
-
-
-def __check_and_create_file(path: str):
-	"""
-	文件如果不存在就创建
-	:param path:
-	:return:
-	"""
-	if not path.startswith("/"): raise Exception("文件需要完整路径")
-
-	if os.path.exists(path): return
-
-	for dir in __get_dirs(path):
-		if not os.path.exists(dir):
-			os.mkdir(dir)
-
-	file = open(path, 'w')
-	file.close()
-
-
-def __get_dirs(path: str) -> list:
-	"""
-	提取文件的文件夹，默认把最后一个/后面的当做文件名
-	:param path:
-	:return:
-	"""
-	splits = path.split("/")
-	cur_dir, lst = '', []
-	for index in range(0, len(splits) - 1):
-		split = splits[index]
-		if not split: continue
-		cur_dir = cur_dir + "/" + split
-		lst.append(cur_dir)
-	return lst
 
 
 if __name__ == '__main__':

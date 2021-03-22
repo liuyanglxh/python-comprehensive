@@ -292,8 +292,8 @@ recon_file_lv1 = '/tmp/推荐内容一级分类百分比.txt'  # 用户推荐内
 read_file_lv1 = '/tmp/近3个月内有效阅读一级分类百分比.txt'  # 用户有效阅读分类百分比
 # csv中，分类的顺序
 title = ['udid', '姓名', '折扣总数',
-		 '服饰手袋', '服饰手袋', '电子电脑', '家居厨卫', '个护保健', '运动户外',
-		 '美食', '旅游', '男士专区', '影视/演出/体育', '金融', '美国生活百科', '资讯', '其他', '美国畅销榜', '黑五', '母婴儿童',
+		 '美妆护肤', '服饰手袋', '电子电脑', '家居厨卫', '个护保健', '母婴儿童', '运动户外',
+		 '美食', '旅游', '男士专区', '影视/演出/体育', '金融', '美国生活百科', '资讯', '其他', '美国畅销榜', '黑五',
 		 '汽车', 'DealMoon活动']
 categories = title[3:len(title)]
 # 推荐和有效阅读分类百分比对比图
@@ -607,11 +607,16 @@ def save_read_data():
 
 	file_util.read_file('/tmp/eval_user.txt', func)
 
+	path = '/tmp/有效阅读.csv'
+	data_list = []
 	for udid in read_dict:
 		user_name = eval_user.get(udid)  # 用户名
 		deal_ids = read_dict.get(udid)  # 有效阅读折扣id
 		percent = cate_percent(deal_ids)  # 有效阅读分类百分比
-		save_to_file2('/tmp/有效阅读.csv', udid, user_name, len(deal_ids), percent)
+		data_list.append(build_data(udid, user_name, len(deal_ids), percent))
+
+	print(len(data_list))
+	csv_util.cover(path, title, data_list)
 
 
 def save_recon_data():
@@ -629,31 +634,41 @@ def save_recon_data():
 
 	file_util.read_file('/tmp/eval_user.txt', func)
 
+	path = '/tmp/推荐内容.csv'
+
+	data_list = []
 	for udid in recon_dict:
 		if udid not in read_ids: continue
 		user_name = eval_user.get(udid)  # 用户名
 		deal_ids = recon_dict.get(udid)  # 有效阅读折扣id
 		percent = cate_percent(deal_ids)  # 有效阅读分类百分比
-		save_to_file2('/tmp/推荐内容.csv', udid, user_name, len(deal_ids), percent)
+		data_list.append(build_data(udid, user_name, len(deal_ids), percent))
+
+	print(len(data_list))
+	csv_util.cover(path, title, data_list)
 
 
-def save_to_file2(path: str, udid: str, user_name: str, total: int, num_dict: dict):
+def build_data(udid: str, user_name: str, total: int, num_dict: dict):
 	"""
 	:param udid:
 	:param user_name:
 	:param total: 	折扣总数
 	:param num_dict: 分类对应的数量
 		{
-			分类名:115
+			分类名:1
 		}
 	:return:
 	"""
-	data = [udid, user_name, total]
+	data = {
+		"udid": udid,
+		"姓名": user_name,
+		"折扣总数": total
+	}
 	for category in categories:
 		percent = num_dict.get(category) if num_dict.get(category) else ""
-		data.append(percent)
+		data[category] = percent
 
-	csv_util.append_line(path, data)
+	return data
 
 
 # 初始化缓存
