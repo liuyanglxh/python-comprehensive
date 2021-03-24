@@ -21,6 +21,7 @@ def append_lines(path: str, data: list):
 	:param data:
 	:return:
 	"""
+	__check_and_create_file(path)
 	with open(path, 'a') as f:
 		for d in data:
 			f.write(str(d) + "\n")
@@ -33,6 +34,7 @@ def cover(path: str, data: list):
 	:param data:
 	:return:
 	"""
+	__check_and_create_file(path)
 	with open(path, 'w') as f:
 		for x in data: f.write(str(x) + "\n")
 
