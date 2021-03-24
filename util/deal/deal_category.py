@@ -84,5 +84,12 @@ def get_attr_in_order(category_id: int, order=None):
 			return c.get(x)
 
 
+def get_priority():
+	"""
+	运营比较关心的分类（参考）
+	"""
+	return ['美妆护肤', '电子电脑', '服饰手袋', '家居厨卫', '食品', '男士专区']
+
+
 if __name__ == '__main__':
 	print(get_attr(1175715921, title_cn))
