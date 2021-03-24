@@ -14,6 +14,16 @@ def read_file(path: str, handle_line):
 				break
 
 
+def read_dir(path: str, handle_line):
+	"""
+	读取目录下的所有文件内容
+	"""
+	if not path.endswith("/"): path += "/"
+	for filename in os.listdir(path):
+		all_path = path + "/" + filename
+		read_file(all_path, handle_line)
+
+
 def append_lines(path: str, data: list):
 	"""
 	追加行到文件
