@@ -29,7 +29,7 @@ def init():
 
 	file_util.read_file(local_file, func)
 
-	print("初始化分类信息", len(cache))
+	print("一共[", len(cache), "]条数据")
 
 
 def refresh():
@@ -97,5 +97,5 @@ def get_priority():
 
 
 if __name__ == '__main__':
-	print(get_attr(1175715921, title_cn))
-	# refresh()
+	print(get_attr(83886080, title_cn))
+# refresh()
