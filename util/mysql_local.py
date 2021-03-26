@@ -4,6 +4,9 @@ import pymysql
 在电脑本地执行的sql工具
 """
 
+recdb = 'recdb'
+dealmoon = 'dealmoon'
+
 
 def execute_sql(sql, db):
 	db_host, db_user, db_pass = "13.57.129.69", "cdoffice", "bookface06"
