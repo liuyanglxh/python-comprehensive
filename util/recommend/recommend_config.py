@@ -21,6 +21,6 @@ def get_all():
 	return mysql_local.execute_sql(sql, db)
 
 if __name__ == '__main__':
-	# name = 'deal.rec.strategy.default'
-	# print(get_by_name(name))
-	print(my_json.dumps(get_all()))
+	name = 'deal.rec.strategy.default'
+	print(get_by_name(name))
+	# print(my_json.dumps(get_all()))

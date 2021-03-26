@@ -1,8 +1,8 @@
-import json
+import json, os
 
 from util import file_util, mysql_local, my_json
 
-local_file = '/tmp/category.txt'
+local_file = '/Users/liuyang/tech/dm/deal/category.txt'
 
 cache = {}
 id, parent_id, label_en, label_cn, title_en, title_cn = 'id', 'parent_id', 'label_en', 'label_cn', 'title_en', 'title_cn'
@@ -16,6 +16,11 @@ def init():
 	"""
 	初始化缓存
 	"""
+
+	if not os.path.exists(local_file):
+		print("nofile")
+		return
+
 	global cache
 
 	def func(line):
@@ -93,3 +98,4 @@ def get_priority():
 
 if __name__ == '__main__':
 	print(get_attr(1175715921, title_cn))
+	# refresh()
