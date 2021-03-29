@@ -65,7 +65,7 @@ def get_data(ids: list):
 
 
 if __name__ == '__main__':
-	ch = CacheModule("test", 200, from_remote=get_data)
+	ch = CacheModule("my_test", 200, from_remote=get_data)
 	ch.get_all([1, 2, 3])
 	ch.get_all([2, 3, 4])
 	ch.get_all([2, 3, 4])

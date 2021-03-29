@@ -6,7 +6,7 @@ import json
 
 bootstrap_servers = {}
 
-consumer = KafkaConsumer('test', "10.80.109.21:9092")
+consumer = KafkaConsumer('my_test', "10.80.109.21:9092")
 
 consumer.subscribe(['ly_test'])
 

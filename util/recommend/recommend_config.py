@@ -2,9 +2,13 @@ from util import mysql_local, my_json
 
 db = 'recdb'
 
+
 def get_by_name(name: str):
 	sql = "select id,name,type,value,description,update_time from recommend_config where name = '%s'" % name
-	id, name, type, value, description, update_time = mysql_local.execute_sql(sql, db)[0]
+	lst = mysql_local.execute_sql(sql, db)
+	if len(lst) == 0: return {}
+
+	id, name, type, value, description, update_time = lst(sql, db)[0]
 	return my_json.dumps(
 		{
 			'id': id,
@@ -16,11 +20,13 @@ def get_by_name(name: str):
 		}
 	)
 
+
 def get_all():
 	sql = 'select * from recommend_config'
 	return mysql_local.execute_sql(sql, db)
 
+
 if __name__ == '__main__':
-	name = 'deal.rec.strategy.default'
+	name = 'deal.rec.category.published.within.ms'
 	print(get_by_name(name))
-	# print(my_json.dumps(get_all()))
+# print(my_json.dumps(get_all()))
