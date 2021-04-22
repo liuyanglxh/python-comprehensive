@@ -29,7 +29,7 @@ def init():
 
 	file_util.read_file(local_file, func)
 
-	print("一共[", len(cache), "]条数据")
+	print("一共[", len(cache), "]条分类信息")
 
 
 def refresh():
@@ -96,6 +96,10 @@ def get_priority():
 	return ['美妆护肤', '电子电脑', '服饰手袋', '家居厨卫', '食品', '男士专区']
 
 
+def get_all():
+	return cache.values()
+
+
 if __name__ == '__main__':
-	print(get_attr(83886080, title_cn))
-# refresh()
+	for x in get_all():
+		if x[title_en] != x[label_en]:    print(x[title_en], '----------', x[label_en])

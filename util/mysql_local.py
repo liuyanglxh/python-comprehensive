@@ -6,6 +6,7 @@ import pymysql
 
 recdb = 'recdb'
 dealmoon = 'dealmoon'
+ugc = 'ugc'
 
 
 def execute_sql(sql, db):
@@ -20,6 +21,6 @@ def execute_sql(sql, db):
 
 
 if __name__ == '__main__':
-	sql = 'select udid from eval_user_base_info'
-	for x in execute_sql(sql, 'recdb'):
-		print(x[0])
+	sql = "select * from deal_index where id = 254828;"
+	for x in execute_sql(sql, 'dealmoon'):
+		print(x)
