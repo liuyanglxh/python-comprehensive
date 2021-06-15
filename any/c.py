@@ -1,21 +1,19 @@
-from forjob.hive import beeline
+export_fmt = """
+hbase org.apache.hadoop.hbase.mapreduce.Export -Dhbase.export.scanner.batch=2000 -D mapred.output.compress=true %s hdfs://10.111.11.201:8020/migrate/hbase/%s 
+""".strip()
+import_fmt = """
+hbase org.apache.hadoop.hbase.mapreduce.Driver import %s hdfs://10.111.11.201:8020/migrate/hbase/%s/*
+""".strip()
+cnt_fmt = """
+hbase org.apache.hadoop.hbase.mapreduce.RowCounter '%s'
+""".strip()
+create_fmt = """
+create '%s','cf' 
+""".strip()
 
-sql_format1 = """
-select log.`time`,log.id,log.udid
-    from ods.ods_deal_index deal
-    join ods.ods_impression_log log on log.id = deal.id
-    where log.`time` between deal.published_time and deal.published_time+172800
-    and lower(device) in ('iphone','android')
-    and log.type='deal' and log.from_page='home_list' and lower(log.category_value)='new'
-    and (log.from_model='feed_list' or log.from_model is null)
-    and deal.id = %s;
-"""
-file = '/tmp/ly/impression.csv'
+tbl = "ugc_guide_u"
 
-sql_format = sql_format1
-if __name__ == '__main__':
-	deal_ids = [2357781, 2358446, 2356300, 2356925, 2357568, 2357380, 2358665, 2359363]
-	# sql_list = [sql_format % str(deal_id) for deal_id in deal_ids]
-	# for x in sql_list: print(beeline.append(x, file))
-	deal_ids = [str(a) for a in deal_ids]
-	print("select min(published_time),max(published_time) from ods_deal_index where id in (%s)" % ','.join(deal_ids))
+print(export_fmt % (tbl, tbl))
+print(create_fmt % tbl)
+print(import_fmt % (tbl, tbl))
+print(cnt_fmt % tbl)

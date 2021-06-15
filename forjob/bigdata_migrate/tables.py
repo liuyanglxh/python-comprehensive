@@ -1,13 +1,10 @@
-"""
-增量的表
-"""
+# 全量的表
 small_tables = """
 17.2 M   51.5 M   /apps/hbase/data/data/default/OPERATION_REC_BUY
 19.7 M   59.1 M   /apps/hbase/data/data/default/OPERATION_REC_DEAL_STATS
 30.3 M   90.8 M   /apps/hbase/data/data/default/USER_CLICK_RECORD
 1.9 M    5.8 M    /apps/hbase/data/data/default/au_ugc_fixed_post_p
 19.4 M   58.3 M   /apps/hbase/data/data/default/au_ugc_guide_c
-6.5 M    19.5 M   /apps/hbase/data/data/default/au_ugc_guide_u      1621579542383(时间)，当前总数128078；
 14.0 M   42.1 M   /apps/hbase/data/data/default/au_ugc_post_u
 6.2 K    18.6 K   /apps/hbase/data/data/default/au_ugc_topic_c
 5.7 K    17.0 K   /apps/hbase/data/data/default/au_ugc_topic_u
@@ -45,6 +42,7 @@ small_tables = """
 10.7 M   32.2 M   /apps/hbase/data/data/default/user_deal_click_info_2021
 553      1.6 K    /apps/hbase/data/data/default/user_deal_click_info_2022
 """
+# 全量的表
 big_tables = """
 516.8 M  1.5 G    /apps/hbase/data/data/default/APP_IMPRESSION
 52.9 M   158.6 M  /apps/hbase/data/data/default/OPERATION_REC_CLICK
@@ -57,29 +55,17 @@ big_tables = """
 62.5 M   187.6 M  /apps/hbase/data/data/default/ca_ugc_guide_c
 256.2 M  768.6 M  /apps/hbase/data/data/default/ca_ugc_post_c
 99.0 M   296.9 M  /apps/hbase/data/data/default/ca_ugc_post_u
-108.5 G  325.6 G  /apps/hbase/data/data/default/deal_click_info_2021    1621237614(快照)   
 704.7 M  2.1 G    /apps/hbase/data/data/default/ugc_fixed_post_p
-4.6 G    13.8 G   /apps/hbase/data/data/default/ugc_guide_c         1621238610(快照时间）     
-2.3 G    6.8 G    /apps/hbase/data/data/default/ugc_guide_u         1621238640（快照时间）    @5.21 15:11 总数43417023行
-54.5 G   163.5 G  /apps/hbase/data/data/default/ugc_post_c          1621238676（快照时间）
-26.0 G   78.1 G   /apps/hbase/data/data/default/ugc_post_u          1621245443（快照时间）
 55.6 M   166.7 M  /apps/hbase/data/data/default/uk_ugc_guide_c
 149.9 M  449.8 M  /apps/hbase/data/data/default/uk_ugc_post_c
 67.5 M   202.4 M  /apps/hbase/data/data/default/uk_ugc_post_u
 """
-create_fmt = """
-create '%s','cf' 
-""".strip()
-
-
-def proc(tb_name):
-    if not tb_name: return
-    print(create_fmt % tb_name)
-
-
-for x in small_tables.split('\n'):
-    tb = x.split('/')[-1].split(' ')[0].strip()
-    proc(tb)
-for x in big_tables.split('\n'):
-    tb = x.split('/')[-1].split(' ')[0].strip()
-    proc(tb)
+# 增量的表
+incrs = """
+6.5 M    19.5 M   /apps/hbase/data/data/default/au_ugc_guide_u      1621579542383(时间)，当前总数128078；
+4.6 G    13.8 G   /apps/hbase/data/data/default/ugc_guide_c         1621238610(快照时间）     
+108.5 G  325.6 G  /apps/hbase/data/data/default/deal_click_info_2021    1621237614(快照)   
+2.3 G    6.8 G    /apps/hbase/data/data/default/ugc_guide_u         1621238640（快照时间）    @5.21 15:11 总数43417023行
+54.5 G   163.5 G  /apps/hbase/data/data/default/ugc_post_c          1621238676（快照时间）
+26.0 G   78.1 G   /apps/hbase/data/data/default/ugc_post_u          1621245443（快照时间）
+"""
